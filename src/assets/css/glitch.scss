@@ -1,0 +1,125 @@
+body {
+	background: black;
+	font-family: 'Varela', sans-serif;
+}
+
+.glitch {
+	color: white;
+	font-size: 100px;
+	position: relative;
+	width: 400px;
+	margin: 0 auto;
+}
+
+@keyframes noise-anim {
+	$steps: 15;
+	@for $i from 0 through $steps {
+		#{percentage($i*(1/$steps))} {
+			$top: random(100);
+			$bottom: random(150 - $top);
+			clip-path: inset(#{$top}% 0 #{$bottom}% 0);
+		}
+	}
+}
+
+.glitch::after {
+	content: attr(data-text);
+	position: absolute;
+	left: 2px;
+	text-shadow: -1px 0 red;
+	top: 0;
+	color: white;
+	background: black;
+	overflow: hidden;
+	animation: noise-anim 10s infinite backwards alternate-reverse;
+}
+
+@keyframes noise-anim-2 {
+	$steps: 15;
+	@for $i from 0 through $steps {
+		#{percentage($i*(1/$steps))} {
+			$top: random(100);
+			$bottom: random(101 - $top);
+			clip-path: inset(#{$top}% 0 #{$bottom}% 0);
+		}
+	}
+}
+
+.glitch::before {
+	content: attr(data-text);
+	position: absolute;
+	left: -2px;
+	text-shadow: 1px 0 blue;
+	top: 0;
+	color: white;
+	background: black;
+	overflow: hidden;
+	animation: noise-anim-2 20s infinite linear alternate-reverse;
+}
+
+@keyframes noise-anime-reverse {
+	$steps: 15;
+	@for $i from 0 through $steps {
+		#{percentage($i*(1/$steps))} {
+			$top: random(120);
+			$bottom: random(150 - $top);
+			clip-path: inset(#{$bottom}% 0 #{$top}% 0);
+		}
+	}
+}
+
+@keyframes noise-anime-reverse-2 {
+	$steps: 15;
+	@for $i from 0 through $steps {
+		#{percentage($i*(1/$steps))} {
+			$top: random(100);
+			$bottom: random(101 - $top);
+			clip-path: inset(#{$bottom}% 0 #{$top}% 0);
+		}
+	}
+}
+
+.glitch-reverse::before {
+	animation: noise-anime-reverse-2 15s infinite linear alternate;
+}
+
+.glitch-reverse::after {
+	animation: noise-anime-reverse 10s infinite linear alternate-reverse;
+}
+// Ref:
+// https://css-tricks.com/glitch-effect-text-images-svg/
+
+.glitch-header {
+	position: absolute !important;
+	left: 0;
+}
+@media screen and (max-width: 800px) {
+	.glitch-header {
+		position: relative !important;
+	}
+	.glitch-subtitle {
+		display: none !important;
+	}
+}
+.glitch-reverse::before,
+.glitch-reverse::after {
+	color: whitesmoke;
+}
+
+.glitch-reverse {
+	font-size: 40px !important;
+	bottom: 0 !important;
+}
+
+.glitch-subtitle {
+	position: absolute;
+	bottom: 0;
+	margin: 0;
+	left: 0;
+	font-size: 15px !important;
+	.special {
+		font-weight: 500;
+		font-style: italic;
+		margin-left: 5px;
+	}
+}
